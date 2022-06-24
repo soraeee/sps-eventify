@@ -3,6 +3,8 @@ import Dropbox from './components/Dropbox';
 // import Note from './components/Note';
 import Search from './components/Search';
 import gym from './icons/gym.svg';
+import hamster from './icons/hamster^^.svg';
+
 
 function Selection() {
 	return (
@@ -47,20 +49,22 @@ function Note() {
 function App() {
 	return (
 		<div className="font-[Futura]">
-			<h1 className="fixed top-0 left-0 h-screen w-28 flex flex-col bg-white dark:bg-gray-900 shadow-lg">
-				<div class="box-border h-28 w-28 p-4 border-4">PIG</div>
+			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg">
+				<div class="bg-[#5BD7A4] h-28 w-28 p-4">
+          <img src={hamster} class="scale-[120%] pl-3 pt-3 " alt="My logo" />
+        </div>
 				<i>A</i>
 				<i>B</i>
-			</h1>
-			<div class="pl-48 pt-8 fixed box-border h-28 w-screen p-4 border-4">
+			</div>
+			<div class="pl-48 pt-8 fixed h-28 w-screen p-4 border-b-2">
         <Selection />
       </div>
-			<div class="pl-48 pt-36 box-border h-screen w-screen p-4 border-4 ">
+			<div class="pl-48 pt-36 h-screen w-screen p-4">
 				<div class="flex">
 					<div class="text-[50px] w-[70%]">Event</div>
 					{/* <div class="text-[50px] w-[30%]"> */}
 					<div class="w-[5%]" />
-					<button class="rounded-none bg-green-400 text-white font-xl w-[15%]">Add new event</button>
+					<button class="rounded-none bg-[#2CB67D] text-white text-xl w-[15%]">Add new event</button>
 
 					<div class="w-[10%]" />
 					{/* </div> */}
@@ -73,10 +77,9 @@ function App() {
 							{' '}
 							<Note />{' '}
 						</div>
-						<div>
-							{' '}
-							<Note />{' '}
-						</div>
+						<div><Note /></div>
+            <div><Note /></div>
+            <div><Note /></div>
 					</div>
 				</div>
 			</div>
