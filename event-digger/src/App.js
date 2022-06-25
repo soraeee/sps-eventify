@@ -1,8 +1,10 @@
 import './App.css';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 // import Dropbox from './components/Dropbox';
 // import Note from './components/Note';
 import Search from './components/Search';
 import Sidebar from './components/Sidebar';
+
 
 import gym from './icons/gym.svg';
 import gymphoto from './icons/gymphoto.svg';
@@ -14,10 +16,97 @@ import add from './icons/add.svg';
 import location from './icons/location.svg';
 import notification from './icons/notification.svg';
 import logout from './icons/logout.svg';
+import Addcard from './AddCard';
+
+function App() {
+	return (
+		<Router>
+			<div className="font-[Futura]">
+				<NavBar />
+				<div class="pl-48 pt-36 h-screen w-screen p-4">
+				<Switch >
+					<Route exact path="/">
+						<EventDisplay />
+					</Route>
+					<Route path="/add">
+						<Addcard />
+					</Route>
+				</Switch>
+				</div>
+			</div>
+		</Router>
+	);
+}
+
+function NavBar() {
+	return (
+		<div >
+			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg">
+					<div class="bg-[#5BD7A4] h-28 w-28 p-4 ">
+						<img src={hamster} class="scale-[120%] pl-3 pt-3 " />
+					</div>
+					<div class="h-[70%] pl-3 pt-3 ">
+						<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
+							<Button />
+							<Button />
+							<Button />
+							<Button />
+						</div>
+					</div>
+					<div class="h-40% pl-11 pt-7">
+						<img src={setting} class="scale-[120%]" alt="My logo" />
+					</div>
+				</div>
+				<div class="pl-48 pt-8 fixed h-28 w-screen p-4 border-b-2">
+					<Selection />
+				</div>
+		</div>
+	);
+}
+
+function EventDisplay() {
+	return (
+		<div >
+				<div class="flex">
+					<div class="text-[50px] w-[70%]">Event</div>
+					{/* <div class="text-[50px] w-[30%]"> */}
+					<div class="w-[5%]" />
+					
+					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
+						<Link to="/add">
+							<div class="flex flex-row">
+								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
+								Add new event
+							</div>
+						</Link>
+					</button>
+					
+
+					<div class="w-[10%]" />
+					{/* </div> */}
+				</div>
+				<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
+				<div class="pt-8">
+					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
+					<div class="grid grid-cols-4">
+						<Note
+							title="Boxing"
+							subtitle="High Intensity Interval Training.High Intensity Interval Training."
+							location="BlueJay GYM"
+							time="Thurs, Dec 24th, 6PM-9PM"
+						/>
+						<Note title="HIIT" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="true" />
+						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
+						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
+					</div>
+				</div>
+			</div>
+	);
+}
+
 
 function Note(props) {
 	return (
-		// <div class="flex box-border h-[350px] w-[285px] p-4 pl-10 border-2 rounded-[20px] bg-white shadow-lg shadow-gray-500">
 		<div class="flex box-border h-[373px] w-[270px] p-4 border-2 rounded-[20px] bg-white shadow-lg shadow-gray-500">
 			<div class="text-[18px] flex flex-col">
 				<div class="h-[15%]">
@@ -126,59 +215,6 @@ function Button() {
 	);
 }
 
-function App() {
-	return (
-		<div className="font-[Futura]">
-			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg">
-				<div class="bg-[#5BD7A4] h-28 w-28 p-4 ">
-					<img src={hamster} class="scale-[120%] pl-3 pt-3 " />
-				</div>
-				<div class="h-[70%] pl-3 pt-3 ">
-					<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
-						<Button />
-						<Button />
-						<Button />
-						<Button />
-					</div>
-				</div>
-				<div class="h-40% pl-11 pt-7">
-					<img src={setting} class="scale-[120%]" alt="My logo" />
-				</div>
-			</div>
-			<div class="pl-48 pt-8 fixed h-28 w-screen p-4 border-b-2">
-				<Selection />
-			</div>
-			<div class="pl-48 pt-36 h-screen w-screen p-4">
-				<div class="flex">
-					<div class="text-[50px] w-[70%]">Event</div>
-					{/* <div class="text-[50px] w-[30%]"> */}
-					<div class="w-[5%]" />
-					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row ">
-						<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
-						Add new event
-					</button>
 
-					<div class="w-[10%]" />
-					{/* </div> */}
-				</div>
-				<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
-				<div class="pt-8">
-					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
-					<div class="grid grid-cols-4">
-						<Note
-							title="Boxing"
-							subtitle="High Intensity Interval Training.High Intensity Interval Training."
-							location="BlueJay GYM"
-							time="Thurs, Dec 24th, 6PM-9PM"
-						/>
-						<Note title="HIIT" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="true" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
 
 export default App;
