@@ -41,7 +41,7 @@ function App() {
 function NavBar() {
 	return (
 		<div >
-			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg">
+			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg ">
 					<div class="bg-[#5BD7A4] h-28 w-28 p-4 ">
 						<img src={hamster} class="scale-[120%] pl-3 pt-3 " />
 					</div>
@@ -57,7 +57,7 @@ function NavBar() {
 						<img src={setting} class="scale-[120%]" alt="My logo" />
 					</div>
 				</div>
-				<div class="pl-48 pt-8 fixed h-28 w-screen p-4 border-b-2">
+				<div class="ml-28 pt-8 fixed h-28 w-screen p-4 border-b-2 bg-white">
 					<Selection />
 				</div>
 		</div>
@@ -67,9 +67,8 @@ function NavBar() {
 function EventDisplay() {
 	return (
 		<div >
-				<div class="flex">
-					<div class="text-[50px] w-[70%]">Event</div>
-					{/* <div class="text-[50px] w-[30%]"> */}
+			<div class="flex">
+				<div class="text-[50px] w-[70%]">Event</div>
 					<div class="w-[5%]" />
 					
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
@@ -149,11 +148,11 @@ function Note(props) {
 
 function Selection() {
 	return (
-		<div class="flex flex-row bg-white ">
-			<div class="w-[40%]">
+		<div class="flex flex-row pl-8">
+			<div class="w-[35%]">
 				<Search />
 			</div>
-			<div class="w-[10%]" />
+			<div class="w-[8%]" />
 			<div class="w-[12%]">
 				<Dropbox title="Date" list={["today","in 3 days","in a week","in a month"]}/>
 			</div>
