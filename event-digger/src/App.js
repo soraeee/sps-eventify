@@ -17,6 +17,7 @@ import location from './icons/location.svg';
 import notification from './icons/notification.svg';
 import logout from './icons/logout.svg';
 import Addcard from './AddCard';
+import CardView from './CardView';
 
 function App() {
 	return (
@@ -30,6 +31,9 @@ function App() {
 					</Route>
 					<Route path="/add">
 						<Addcard />
+					</Route>
+					<Route path="/view">
+						<CardView />
 					</Route>
 				</Switch>
 				</div>
@@ -88,15 +92,18 @@ function EventDisplay() {
 				<div class="pt-8">
 					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
+					<Link to="/view">
 						<Note
 							title="Boxing"
 							subtitle="High Intensity Interval Training.High Intensity Interval Training."
 							location="BlueJay GYM"
 							time="Thurs, Dec 24th, 6PM-9PM"
 						/>
+						</Link>
 						<Note title="HIIT" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="true" />
 						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
 						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
+					
 					</div>
 				</div>
 			</div>
