@@ -3,12 +3,6 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 function Addcard() {
 	return (
 		<div>
-			{/* page banner
-			<div class="text-[50px]">Event</div>
-			<div class="flex flex-row">
-				<h2 class="text-[25px] pl-1 w-[82%] text-[#A6ACBE]">Your all-in-one event planner</h2>
-			</div> */}
-
 			<div class="pt-4 pl-2">
 				<div class="gap-3 flex flex-col box-border h-[1350px] w-[1210px] p-4 border-2 rounded-[20px] bg-white shadow-2xl shadow-gray-500">
 					<div class=" ml-14 ">
