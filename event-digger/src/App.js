@@ -1,10 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-// import Dropbox from './components/Dropbox';
-// import Note from './components/Note';
 import Search from './components/Search';
-import Sidebar from './components/Sidebar';
-
 
 import gym from './icons/gym.svg';
 import gymphoto from './icons/gymphoto.svg';
@@ -16,6 +12,7 @@ import add from './icons/add.svg';
 import location from './icons/location.svg';
 import notification from './icons/notification.svg';
 import logout from './icons/logout.svg';
+
 import Addcard from './AddCard';
 import CardView from './CardView';
 
@@ -75,6 +72,7 @@ function EventDisplay() {
 				<div class="text-[50px] w-[70%]">Event</div>
 					<div class="w-[5%]" />
 					
+					{/* add new event button */}
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
 						<Link to="/add">
 							<div class="flex flex-row">
@@ -220,7 +218,5 @@ function Button() {
 		</div>
 	);
 }
-
-
 
 export default App;
