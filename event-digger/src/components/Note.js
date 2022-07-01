@@ -6,7 +6,6 @@ import gymphoto from '../icons/gymphoto.svg';
 
 function Note(props) {
 	return (
-		// <div class="flex box-border h-[350px] w-[285px] p-4 pl-10 border-2 rounded-[20px] bg-white shadow-lg shadow-gray-500">
 		<div class="flex box-border h-[373px] w-[270px] p-4 border-2 rounded-[20px] bg-white shadow-lg shadow-gray-500">
 			<div class="text-[18px] flex flex-col">
 				<div class="h-[15%]">
