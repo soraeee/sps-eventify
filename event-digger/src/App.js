@@ -121,12 +121,12 @@ function EventDisplay(props) {
 					
 					{/* add new event button */}
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
-						<Link to="/add">
+					<a onClick={() => {window.location.href="/add"}}>
 							<div class="flex flex-row">
 								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
 								Add new event
 							</div>
-						</Link>
+						</a>
 					</button>
 					
 
@@ -138,23 +138,12 @@ function EventDisplay(props) {
 					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
 					{props.notes.map((note, index) => {
-            return <Note title={note.title}
-			subtitle={note.subtitle}
-			location="BlueJay GYM"
-			time="Thurs, Dec 24th, 6PM-9PM"  />;
-          })}
-					{/* <Link to="/view">
-						<Note
-							title="Boxing"
-							subtitle="High Intensity Interval Training.High Intensity Interval Training."
-							location="BlueJay GYM"
-							time="Thurs, Dec 24th, 6PM-9PM"
-						/>
-					</Link>
-						<Note title="HIIT" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="true" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" /> */}
-					
+            			return <div  class="mb-10"><Note title={note.title}
+								subtitle={note.subtitle}
+								location={note.location}
+								details={note.details}
+								time="Thurs, Dec 24th, 6PM-9PM"  /></div>;
+         				})}
 					</div>
 				</div>
 			</div>

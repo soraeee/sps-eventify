@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import { withRouter } from "react-router";
 class Addcard extends Component {
 	constructor(props) {
 		super(props);
@@ -7,7 +8,7 @@ class Addcard extends Component {
 			title: '',
 			subtitle: '',
 			location: '',
-			time: '',
+			details: '',
 		};
 	}
 
@@ -23,11 +24,22 @@ class Addcard extends Component {
 		});
 	};
 
+	updateLocation = (event) => {
+		this.setState({
+			location: event.target.value
+		});
+	};
+
+	updateDetails = (event) => {
+		this.setState({
+			details: event.target.value
+		});
+	};
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 		this.props.addCard(this.state);
 		console.log('submit');
-		// this.props.history.push('/');
 	};
 
 	render() {
@@ -39,7 +51,7 @@ class Addcard extends Component {
 							{/* return/divider icons */}
 							<div class="h-24 flex flex-col gap-6 mt-4">
 								{/* return */}
-								<Link to="/">
+								<a onClick={() => {window.location.href="/"}}>
 									<svg
 										class="scale-[90%]"
 										width="34"
@@ -53,7 +65,7 @@ class Addcard extends Component {
 											fill="#A6ACBE"
 										/>
 									</svg>
-								</Link>
+								</a>
 								{/* divider */}
 								<svg
 									width="1034"
@@ -133,13 +145,15 @@ class Addcard extends Component {
 									id="username"
 									type="text"
 									placeholder="type here"
+									onChange={this.updateLocation}
 								/>
 								<div class="ml-3 text-2xl mt-3">Details</div>
 								<textarea
 									class="indent-2 pt-6 text-medium shadow appearance-none border w-[1000px] h-[205px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									id="username"
 									type="text"
-									placeholder="ff"
+									placeholder="type here"
+									onChange={this.updateDetails}
 								/>
 
 								{/* Image */}
@@ -166,14 +180,16 @@ class Addcard extends Component {
 									</div>
 									<input type="file" class="opacity-0" />
 								</label>
-								<div class="text-right mr-36 mt-16">
+								
+								<a class="text-right mr-36 mt-16" onClick={() => {window.location.href="/"}}>
 									<button
 										class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"
 										onClick={this.handleSubmit}
 									>
 										Submit
 									</button>
-								</div>
+								</a>
+								
 							</div>
 						</div>
 					</div>
@@ -183,4 +199,4 @@ class Addcard extends Component {
 	}
 }
 
-export default Addcard;
+export default withRouter(Addcard);
