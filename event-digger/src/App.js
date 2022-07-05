@@ -66,11 +66,11 @@ class App extends Component {
 	return (
 		<Router>
 			<div className="font-[Futura]">
-				<NavBar />
+				<NavBar className="z-30"/>
 				<div class="pl-48 pt-36 h-screen w-screen p-4">
 				<Switch >
 					<Route exact path="/">
-						<EventDisplay notes={this.state.notes}/>
+						<EventDisplay notes={this.state.notes} />
 					</Route>
 					<Route path="/add">
 						<Addcard addCard={this.addNote}/>

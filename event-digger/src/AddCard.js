@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import React, { Component } from 'react';
-import { withRouter } from "react-router";
+import { Radio } from "@material-tailwind/react";
+import { withRouter } from 'react-router';
 class Addcard extends Component {
 	constructor(props) {
 		super(props);
@@ -8,7 +9,7 @@ class Addcard extends Component {
 			title: '',
 			subtitle: '',
 			location: '',
-			details: '',
+			details: ''
 		};
 	}
 
@@ -49,9 +50,13 @@ class Addcard extends Component {
 					<div class="gap-3 flex flex-col box-border h-[1350px] w-[1210px] p-4 border-2 rounded-[20px] bg-white shadow-2xl shadow-gray-500">
 						<div class=" ml-14 ">
 							{/* return/divider icons */}
-							<div class="h-24 flex flex-col gap-6 mt-4">
+							<div class="h-24 flex flex-col gap-6 mt-4 z-10">
 								{/* return */}
-								<a onClick={() => {window.location.href="/"}}>
+								<a
+									onClick={() => {
+										window.location.href = '/';
+									}}
+								>
 									<svg
 										class="scale-[90%]"
 										width="34"
@@ -130,7 +135,10 @@ class Addcard extends Component {
 								</div>
 								<div class="flex flex-row">
 									<div class="h-12 w-[20%]  text-2xl">Format</div>
-									<div class="h-12 w-[60%]">Time</div>
+									<div class="h-12 w-[60%]">
+										<Radio id="html" name="type" label="HTML" />
+										<Radio id="react" name="type" label="React" defaultChecked />
+									</div>
 								</div>
 								<div class="flex flex-row">
 									<div class="h-12 w-[20%]  text-2xl">Type</div>
@@ -180,8 +188,13 @@ class Addcard extends Component {
 									</div>
 									<input type="file" class="opacity-0" />
 								</label>
-								
-								<a class="text-right mr-36 mt-16" onClick={() => {window.location.href="/"}}>
+
+								<a
+									class="text-right mr-36 mt-16"
+									onClick={() => {
+										window.location.href = '/';
+									}}
+								>
 									<button
 										class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"
 										onClick={this.handleSubmit}
@@ -189,7 +202,6 @@ class Addcard extends Component {
 										Submit
 									</button>
 								</a>
-								
 							</div>
 						</div>
 					</div>
