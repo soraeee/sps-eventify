@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Radio } from '@material-tailwind/react';
-import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router';
+
 class Addcard extends Component {
 	constructor(props) {
 		super(props);
@@ -13,7 +13,8 @@ class Addcard extends Component {
 			details: '',
 			format: '',
 			price: '',
-			time:''
+			time: '',
+			file: ''
 		};
 	}
 
@@ -64,6 +65,23 @@ class Addcard extends Component {
 		this.setState({
 			time: event.target.value
 		});
+	};
+
+	handleChange = (event) => {
+		// console.log(e.target.files);
+		// this.setState({
+		// 	file: URL.createObjectURL(e.target.files[0])
+		// });
+
+		if (event.target.files && event.target.files[0]) {
+			let reader = new FileReader();
+			reader.onload = (e) => {
+				this.setState({ file: e.target.result });
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		}
+
+		// setFile(URL.createObjectURL(e.target.files[0]));
 	};
 
 	render() {
@@ -149,7 +167,7 @@ class Addcard extends Component {
 											value="Class"
 											name="Format"
 											class="mb-2 w-[15px]"
-											checked
+											defaultChecked
 										/>{' '}
 										Class
 										<input type="radio" value="Festival" name="Format" class="mb-2 w-[15px] " />
@@ -169,7 +187,7 @@ class Addcard extends Component {
 											value="Free"
 											name="Price"
 											class="mb-2 w-[15px]"
-											checked
+											defaultChecked
 										/>{' '}
 										FREE
 										<input type="radio" value="$" name="Price" class="mb-2 w-[15px] " /> $1-10
@@ -200,8 +218,10 @@ class Addcard extends Component {
 
 								{/* Image */}
 								<div class="ml-3 text-2xl mt-3"> Upload Image</div>
-								<label class="flex flex-col w-[1000px] h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-									<div class="flex flex-col items-center justify-center pt-7">
+								<div class="flex flex-row gap-6">
+									{/* <Upload /> */}
+									<label class="text-center items-center flex flex-col w-[700px] h-42 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+										<input type="file" onChange={this.handleChange} class="opacity-0" />
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
@@ -219,10 +239,18 @@ class Addcard extends Component {
 										<p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
 											Attach a file
 										</p>
+									</label>
+									<div class="flex flex-col mt-[-40px] gap-2">
+										Preview:
+										{this.state.file != "" ? (	
+											<img class="h-36 w-64  object-cover border-gray-300" src={this.state.file} />
+										) : (<div class="h-36 w-64 border-gray-300 text-gray-400 border-4 bg-gray-100 text-center border-dashed  items-center">
+											<div class="pt-[52px]">upload to preview!</div>
+										</div>)}
+										
+										
 									</div>
-									<input type="file" class="opacity-0" />
-								</label>
-
+								</div>
 								<a
 									class="text-right mr-36 mt-16"
 									onClick={() => {

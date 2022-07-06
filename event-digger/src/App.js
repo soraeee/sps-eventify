@@ -28,6 +28,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		// localStorage.clear();
 	  const notes = window.localStorage.getItem("notes");
 	  this.setState({
 		notes: notes ? JSON.parse(notes) : [],
@@ -146,6 +147,7 @@ function EventDisplay(props) {
 								details={note.details}
 								price={note.price}
 								format={note.format}
+								file={note.file}
 								time={note.time} /></div>;
          				})}
 					</div>
@@ -167,10 +169,10 @@ function Note(props) {
 				</div>
 
 				<div class="h-[40%]">
-					<img src={gymphoto} class="max-w-full h-auto" />
+				<img class="h-36 w-64  object-cover" src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-3 text-[32px] font-medium">
+					<div class="h-[35%] pt-4 text-[32px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
