@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import React, { Component } from 'react';
-import { Radio } from "@material-tailwind/react";
+import { Radio } from '@material-tailwind/react';
+import DatePicker from 'react-datepicker';
 import { withRouter } from 'react-router';
 class Addcard extends Component {
 	constructor(props) {
@@ -9,7 +10,10 @@ class Addcard extends Component {
 			title: '',
 			subtitle: '',
 			location: '',
-			details: ''
+			details: '',
+			format: '',
+			price: '',
+			time:''
 		};
 	}
 
@@ -41,6 +45,25 @@ class Addcard extends Component {
 		event.preventDefault();
 		this.props.addCard(this.state);
 		console.log('submit');
+	};
+
+	updatePrice = (event) => {
+		console.log(event.target.value);
+		this.setState({
+			price: event.target.value
+		});
+	};
+
+	updateFormat = (event) => {
+		this.setState({
+			format: event.target.value
+		});
+	};
+
+	updateTime = (event) => {
+		this.setState({
+			time: event.target.value
+		});
 	};
 
 	render() {
@@ -109,40 +132,51 @@ class Addcard extends Component {
 								<div class="flex flex-row">
 									<div class="h-12 w-[20%] text-2xl">Time</div>
 									<div class="h-12 w-[60%]">
-										<div class="relative">
-											<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-												<svg
-													class="w-5 h-5 text-gray-500 dark:text-gray-400"
-													fill="currentColor"
-													viewBox="0 0 20 20"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<path
-														fill-rule="evenodd"
-														d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-														clip-rule="evenodd"
-													/>
-												</svg>
-											</div>
-											<input
-												datepicker
-												type="text"
-												class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-												placeholder="Select date"
-											/>
-										</div>
+										<input
+											class="indent-2 text-sm shadow appearance-none border w-[600px] h-[40px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+											id="time"
+											type="text"
+											placeholder="MM/DD/YYYY, HH:MM AM or PM"
+											onChange={this.updateTime}
+										/>
 									</div>
 								</div>
 								<div class="flex flex-row">
 									<div class="h-12 w-[20%]  text-2xl">Format</div>
-									<div class="h-12 w-[60%]">
-										<Radio id="html" name="type" label="HTML" />
-										<Radio id="react" name="type" label="React" defaultChecked />
+									<div class="flex flex-row gap-6 text-lg mt-2 " onChange={this.updateFormat}>
+										<input
+											type="radio"
+											value="Class"
+											name="Format"
+											class="mb-2 w-[15px]"
+											checked
+										/>{' '}
+										Class
+										<input type="radio" value="Festival" name="Format" class="mb-2 w-[15px] " />
+										Festival
+										<input type="radio" value="Networking" name="Format" class="mb-2 w-[15px] " />
+										Networking
+										<input type="radio" value="Party" name="Format" class="mb-2 w-[15px] " /> Party
+										<input type="radio" value="Performance" name="Format" class="mb-2 w-[15px] " />
+										Performance
 									</div>
 								</div>
 								<div class="flex flex-row">
-									<div class="h-12 w-[20%]  text-2xl">Type</div>
-									<div class="h-12 w-[60%]">Time</div>
+									<div class="h-12 w-[20%]  text-2xl">Price</div>
+									<fieldset class="flex flex-row gap-6 text-lg mt-2 " onChange={this.updatePrice}>
+										<input
+											type="radio"
+											value="Free"
+											name="Price"
+											class="mb-2 w-[15px]"
+											checked
+										/>{' '}
+										FREE
+										<input type="radio" value="$" name="Price" class="mb-2 w-[15px] " /> $1-10
+										<input type="radio" value="$$" name="Price" class="mb-2 w-[15px] " /> $10-30
+										<input type="radio" value="$$$" name="Price" class="mb-2 w-[15px] " /> $30-50
+										<input type="radio" value="$$$$" name="Price" class="mb-2 w-[15px] " /> $50+
+									</fieldset>
 								</div>
 							</div>
 

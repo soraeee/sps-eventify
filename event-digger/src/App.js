@@ -138,11 +138,15 @@ function EventDisplay(props) {
 					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
 					{props.notes.map((note, index) => {
-            			return <div  class="mb-10"><Note title={note.title}
+            			return <div  class="mb-10"><Note
+								name="test"
+								title={note.title}
 								subtitle={note.subtitle}
 								location={note.location}
 								details={note.details}
-								time="Thurs, Dec 24th, 6PM-9PM"  /></div>;
+								price={note.price}
+								format={note.format}
+								time={note.time} /></div>;
          				})}
 					</div>
 				</div>
@@ -158,7 +162,7 @@ function Note(props) {
 				<div class="h-[15%]">
 					<div class="flex flex-row ml-[-8px]">
 						<img src={gym} class="ml-[-2px] scale-[50%]" />
-						<div class="pt-3 ml-[-2px]">Recreation Center</div>
+						<div class="pt-3 ml-[-2px]">{props.name}</div>
 					</div>
 				</div>
 
@@ -166,12 +170,12 @@ function Note(props) {
 					<img src={gymphoto} class="max-w-full h-auto" />
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-1 text-[40px] font-medium">
+					<div class="h-[35%] pt-3 text-[32px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
 								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
-									STU
+								{props.price}
 								</button>
 							</div>
 						</div>
