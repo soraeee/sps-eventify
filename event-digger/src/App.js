@@ -15,6 +15,7 @@ import logout from './icons/logout.svg';
 
 import Addcard from './AddCard';
 import CardView from './CardView';
+import EventView from './EventView';
 
 function App() {
 	return (
@@ -30,7 +31,7 @@ function App() {
 						<Addcard />
 					</Route>
 					<Route path="/view">
-						<CardView />
+						<EventView />
 					</Route>
 				</Switch>
 				</div>
