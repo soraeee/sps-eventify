@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Search from './components/Search';
@@ -21,69 +21,69 @@ import EventView from './EventView';
 
 class App extends Component {
 	constructor(props) {
-	  super(props);
-	  this.state = {
-		notes: [],
-	  };
+		super(props);
+		this.state = {
+			notes: [],
+		};
 	}
 
 	componentDidMount() {
 		// localStorage.clear();
-	  const notes = window.localStorage.getItem("notes");
-	  this.setState({
-		notes: notes ? JSON.parse(notes) : [],
-	  });
+		const notes = window.localStorage.getItem("notes");
+		this.setState({
+			notes: notes ? JSON.parse(notes) : [],
+		});
 	}
-  
+
 	saveNotes = () => {
-	  window.localStorage.setItem("notes", JSON.stringify(this.state.notes));
+		window.localStorage.setItem("notes", JSON.stringify(this.state.notes));
 	};
-  
+
 	deleteNote = (note) => {
-	  this.setState((state) => {
-		return {
-		  notes: state.notes.filter((n) => n.id !== note.id),
-		};
-	  }, this.saveNotes);
+		this.setState((state) => {
+			return {
+				notes: state.notes.filter((n) => n.id !== note.id),
+			};
+		}, this.saveNotes);
 	};
-  
+
 	addNote = (note) => {
-	  this.setState((state) => {
-		return {
-		  notes: [...state.notes, Object.assign(note, { id: uuidv4() })],
-		};
-	  }, this.saveNotes);
+		this.setState((state) => {
+			return {
+				notes: [...state.notes, Object.assign(note, { id: uuidv4() })],
+			};
+		}, this.saveNotes);
 	};
-  
+
 	editNote = (note) => {
-	  this.setState((state) => {
-		return {
-		  notes: state.notes.map((n) => (n.id === note.id ? note : n)),
-		};
-	  }, this.saveNotes);
+		this.setState((state) => {
+			return {
+				notes: state.notes.map((n) => (n.id === note.id ? note : n)),
+			};
+		}, this.saveNotes);
 	};
-  
+
 	render() {
-	return (
-		<Router>
-			<div className="font-[Futura]">
-				<NavBar className="z-30"/>
-				<div class="pl-48 pt-36 h-screen w-screen p-4">
-				<Switch >
-					<Route exact path="/">
-						<EventDisplay notes={this.state.notes} />
-					</Route>
-					<Route path="/add">
-						<Addcard addCard={this.addNote}/>
-					</Route>
-					<Route path="/view">
-						<EventView />
-					</Route>
-				</Switch>
+		return (
+			<Router>
+				<div className="font-[Futura]">
+					<NavBar className="z-30" />
+					<div class="pl-48 pt-36 h-screen w-screen p-4">
+						<Switch >
+							<Route exact path="/">
+								<EventDisplay notes={this.state.notes} />
+							</Route>
+							<Route path="/add">
+								<Addcard addCard={this.addNote} />
+							</Route>
+							<Route path="/view/:id" component = {EventView}>
+								<EventView notes={this.state.notes}/>
+							</Route>
+						</Switch>
+					</div>
 				</div>
-			</div>
-		</Router>
-	);
+			</Router>
+		);
 	}
 }
 
@@ -91,24 +91,24 @@ function NavBar() {
 	return (
 		<div >
 			<div className="bg-[#2CB67D] fixed top-0 left-0 h-screen w-28 flex flex-col dark:bg-gray-900 shadow-lg ">
-					<div class="bg-[#5BD7A4] h-28 w-28 p-4 ">
-						<img src={hamster} class="scale-[120%] pl-3 pt-3 " />
-					</div>
-					<div class="h-[70%] pl-3 pt-3 ">
-						<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
-							<Button />
-							<Button />
-							<Button />
-							<Button />
-						</div>
-					</div>
-					<div class="h-40% pl-11 pt-7">
-						<img src={setting} class="scale-[120%]" alt="My logo" />
+				<div class="bg-[#5BD7A4] h-28 w-28 p-4 ">
+					<img src={hamster} class="scale-[120%] pl-3 pt-3 " />
+				</div>
+				<div class="h-[70%] pl-3 pt-3 ">
+					<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
+						<Button />
+						<Button />
+						<Button />
+						<Button />
 					</div>
 				</div>
-				<div class="ml-28 pt-8 fixed h-28 w-screen p-4 border-b-2 bg-white">
-					<Selection />
+				<div class="h-40% pl-11 pt-7">
+					<img src={setting} class="scale-[120%]" alt="My logo" />
 				</div>
+			</div>
+			<div class="ml-28 pt-8 fixed h-28 w-screen p-4 border-b-2 bg-white">
+				<Selection />
+			</div>
 		</div>
 	);
 }
@@ -118,28 +118,29 @@ function EventDisplay(props) {
 		<div >
 			<div class="flex">
 				<div class="text-[50px] w-[70%]">Event</div>
-					<div class="w-[5%]" />
-					
-					{/* add new event button */}
-					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
-					<a onClick={() => {window.location.href="/add"}}>
-							<div class="flex flex-row">
-								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
-								Add new event
-							</div>
-						</a>
-					</button>
-					
+				<div class="w-[5%]" />
 
-					<div class="w-[10%]" />
-					{/* </div> */}
-				</div>
-				<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
-				<div class="pt-8">
-					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
-					<div class="grid grid-cols-4">
+				{/* add new event button */}
+				<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
+					<a onClick={() => { window.location.href = "/add" }}>
+						<div class="flex flex-row">
+							<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
+							Add new event
+						</div>
+					</a>
+				</button>
+
+
+				<div class="w-[10%]" />
+				{/* </div> */}
+			</div>
+			<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
+			<div class="pt-8">
+				{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
+				<div class="grid grid-cols-4">
 					{props.notes.map((note, index) => {
-            			return <div  class="mb-10"><Note
+						return <div class="mb-10" key={note.id}><Link to = {`/view/${note.id}`}>
+							<Note
 								name="test"
 								title={note.title}
 								subtitle={note.subtitle}
@@ -148,11 +149,13 @@ function EventDisplay(props) {
 								price={note.price}
 								format={note.format}
 								file={note.file}
-								time={note.time} /></div>;
-         				})}
-					</div>
+								time={note.time} 
+							/>				
+						</Link></div>;
+					})}
 				</div>
 			</div>
+		</div>
 	);
 }
 
@@ -169,7 +172,7 @@ function Note(props) {
 				</div>
 
 				<div class="h-[40%]">
-				<img class="h-36 w-64  object-cover" src={props.file} /> 
+					<img class="h-36 w-64  object-cover" src={props.file} />
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
 					<div class="h-[35%] pt-4 text-[32px] font-medium">
@@ -177,7 +180,7 @@ function Note(props) {
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
 								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
-								{props.price}
+									{props.price}
 								</button>
 							</div>
 						</div>
@@ -207,13 +210,13 @@ function Selection() {
 			</div>
 			<div class="w-[8%]" />
 			<div class="w-[12%]">
-				<Dropbox title="Date" list={["today","in 3 days","in a week","in a month"]}/>
+				<Dropbox title="Date" list={["today", "in 3 days", "in a week", "in a month"]} />
 			</div>
 			<div class="w-[12%]">
-				<Dropbox title="Location" list={["oncampus","online"]}/>
+				<Dropbox title="Location" list={["oncampus", "online"]} />
 			</div>
 			<div class="w-[16%]">
-				<Dropbox title="Tag" list={["student organization","sports","campus management","career management"]}/>
+				<Dropbox title="Tag" list={["student organization", "sports", "campus management", "career management"]} />
 			</div>
 			<div class="w-[4%]">
 				<img src={notification} class="scale-[90%] pl-3 pt-3 " />
@@ -244,12 +247,12 @@ function Dropbox(props) {
 				<div class="absolute top-full hidden group-hover:block min-w-full w-max bg-white shadow-md mt-1 rounded">
 					<ul class="text-left border rounded">
 						{props.list.map((m) => {
-          					return (
-            					<>
+							return (
+								<>
 									<li class="px-4 py-1 hover:bg-gray-100 border-b">{m}</li>
 								</>
-          					);
-        				})}	
+							);
+						})}
 					</ul>
 				</div>
 			</button>

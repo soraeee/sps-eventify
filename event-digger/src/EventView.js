@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, useParams } from 'react-router-dom';
 
 // definitely replace later
 import gymphoto from './icons/gymphoto.svg';
@@ -6,7 +6,17 @@ import gymphoto from './icons/gymphoto.svg';
 import time from './icons/time.svg';
 import location from './icons/location.svg';
 
-function EventView() {
+function EventView(props) {
+
+	const eventId = useParams().id;
+
+	const data = props.notes.find(note => note.id === eventId);
+	console.log(props);
+	console.log(data);
+	console.log(eventId);
+
+	//const title = () => props.notes[0].title;
+	
 	return (
 		<div>
 			<div class="pt-4 pl-2">
@@ -51,26 +61,26 @@ function EventView() {
 
 							<div class="relative">
 								<div class = "text-[18px] flex flex-col pl-5">
-									<div class="h-12 text-4xl">Event Title</div>
-									<div class="h-8 text-base">Organized by John Doe</div>
+									<div class="h-12 text-4xl">{data.title}</div>
+									<div class="h-8 text-base">Organized by {data.name}</div>
 									<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white max-w-fit">
 										Student Organization
 									</button>
 									<div class = "space-y-0.5">
 										<div class="flex flex-row">
 											<img src={location} class="scale-[80%] pb-16 pr-2" />
-											<div class="h-1">Main Street</div>
+											<div class="h-1">{data.location}</div>
 										</div>
 										<div class="flex flex-row">
 											<img src={time} class="scale-[80%] pb-16 pr-2" />
-											<div class="h-1">July 4, 2022</div>
+											<div class="h-1">{data.time}</div>
 										</div>
 										<div class="flex flex-row">
 											<img src={time} class="scale-[80%] pb-16 pr-2" />
 											<div class="h-1">4:20 PM - 6:00 PM</div>
 										</div>
 									</div>
-									<div class="h-8 text-base">Lorem ipsum description whatever</div>
+									<div class="h-8 text-base">{data.description}</div>
 								</div>
 							</div>
 						</div>
