@@ -1,6 +1,31 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from "react";
 
 function Addcard() {
+    const [title, setTitle] = useState(""); 
+    const [message, setMessage] = useState(""); 
+    let handleSubmit = (e) => {       
+        e.preventDefault(); 
+        try { 
+            console.log(JSON.stringify({ title: title, }));
+            let res = fetch("https://qzhu-sps-summer22.ue.r.appspot.com/form", 
+            { method: "POST", 
+              headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+               },
+              body: JSON.stringify({ title: title, }), }).then(response => response.json())           
+                .then(data => {             
+                console.log(data)        
+                });   
+            
+            console.log(res);
+            if (res.status === 200) { setTitle(""); setMessage("Form submitted successfully"); } 
+            else { setMessage("Some error occured"); } 
+        } 
+        catch (err) { console.log(err); } 
+    }; 
+        
 	return (
 		<div>
 			<div class="pt-4 pl-2">
@@ -37,6 +62,7 @@ function Addcard() {
 							</svg>
 						</div>
 
+                        <form onSubmit={handleSubmit}>
 						{/* title/subtitle */}
 						<div class="h-24">
 							<input
@@ -44,6 +70,7 @@ function Addcard() {
 								id="username"
 								type="text"
 								placeholder="Title"
+                                onChange={(e) => setTitle(e.target.value)}
 							/>
 						</div>
 						<div class="h-20">
@@ -120,11 +147,12 @@ function Addcard() {
 								<input type="file" class="opacity-0" />
 							</label>
 							<div class="text-right mr-36 mt-16">
-								<button class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl">
+                            <button type="submit" class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"> 
 									Submit
-								</button>
+							</button>
 							</div>
 						</div>
+                        </form>
 					</div>
 				</div>
 			</div>
