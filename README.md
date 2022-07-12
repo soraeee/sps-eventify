@@ -7,7 +7,7 @@ wow!!
 2. 'cd event-digger' go to project folder 
 3. `npm i` install npm packages
 4. `npm i --save material-ui-search-bar --force`
-`npm i react-router-dom` install two necessary npm package that's not included in the default
+`npm i react-router-dom` `npm i @material-tailwind/react` install three necessary npm packages that's not included in the default
 5. `npm start`
 
 ## To run it on cloudshell
