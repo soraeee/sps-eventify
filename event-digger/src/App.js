@@ -1,5 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Search from './components/Search';
 
 import gym from './icons/gym.svg';
@@ -15,28 +17,74 @@ import logout from './icons/logout.svg';
 
 import Addcard from './AddCard';
 import CardView from './CardView';
+import EventView from './EventView';
 
-function App() {
+class App extends Component {
+	constructor(props) {
+	  super(props);
+	  this.state = {
+		notes: [],
+	  };
+	}
+
+	componentDidMount() {
+		// localStorage.clear();
+	  const notes = window.localStorage.getItem("notes");
+	  this.setState({
+		notes: notes ? JSON.parse(notes) : [],
+	  });
+	}
+  
+	saveNotes = () => {
+	  window.localStorage.setItem("notes", JSON.stringify(this.state.notes));
+	};
+  
+	deleteNote = (note) => {
+	  this.setState((state) => {
+		return {
+		  notes: state.notes.filter((n) => n.id !== note.id),
+		};
+	  }, this.saveNotes);
+	};
+  
+	addNote = (note) => {
+	  this.setState((state) => {
+		return {
+		  notes: [...state.notes, Object.assign(note, { id: uuidv4() })],
+		};
+	  }, this.saveNotes);
+	};
+  
+	editNote = (note) => {
+	  this.setState((state) => {
+		return {
+		  notes: state.notes.map((n) => (n.id === note.id ? note : n)),
+		};
+	  }, this.saveNotes);
+	};
+  
+	render() {
 	return (
 		<Router>
 			<div className="font-[Rubik]">
-				<NavBar />
+				<NavBar className="z-30"/>
 				<div class="pl-48 pt-36 h-screen w-screen p-4">
 				<Switch >
 					<Route exact path="/">
-						<EventDisplay />
+						<EventDisplay notes={this.state.notes} />
 					</Route>
 					<Route path="/add">
-						<Addcard />
+						<Addcard addCard={this.addNote}/>
 					</Route>
-					<Route path="/view">
-						<CardView />
+					<Route path="/view/:id">
+						<EventView notes={this.state.notes}/>
 					</Route>
 				</Switch>
 				</div>
 			</div>
 		</Router>
 	);
+	}
 }
 
 function NavBar() {
@@ -65,7 +113,7 @@ function NavBar() {
 	);
 }
 
-function EventDisplay() {
+function EventDisplay(props) {
 	return (
 		<div >
 			<div class="flex">
@@ -74,12 +122,12 @@ function EventDisplay() {
 					
 					{/* add new event button */}
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
-						<Link to="/add">
+						<a onClick={() => {window.location.href="/add"}}>
 							<div class="flex flex-row">
 								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
 								Add new event
 							</div>
-						</Link>
+						</a>
 					</button>
 					
 
@@ -90,18 +138,20 @@ function EventDisplay() {
 				<div class="pt-8">
 					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
-					<Link to="/view">
-						<Note
-							title="Boxing"
-							subtitle="High Intensity Interval Training.High Intensity Interval Training."
-							location="BlueJay GYM"
-							time="Thurs, Dec 24th, 6PM-9PM"
-						/>
-						</Link>
-						<Note title="HIIT" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="true" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
-						<Note title="Yoga" location="BlueJay GYM" time="Thurs, Dec 24th, 6PM-9PM" popular="false" />
-					
+						
+					{props.notes.map((note, index) => {
+            			return <div  class="mb-10">
+							<a onClick={() => {window.location.href="/view/"+ note.id}}><Note
+								name="test"
+								title={note.title}
+								subtitle={note.subtitle}
+								location={note.location}
+								details={note.details}
+								price={note.price}
+								format={note.format}
+								file={note.file}
+								time={note.time} /></a> </div>;
+         				})}
 					</div>
 				</div>
 			</div>
@@ -116,20 +166,20 @@ function Note(props) {
 				<div class="h-[15%]">
 					<div class="flex flex-row ml-[-8px]">
 						<img src={gym} class="ml-[-2px] scale-[50%]" />
-						<div class="pt-3 ml-[-2px]">Recreation Center</div>
+						<div class="pt-3 ml-[-2px]">{props.name}</div>
 					</div>
 				</div>
 
 				<div class="h-[40%]">
-					<img src={gymphoto} class="max-w-full h-auto" />
+				<img class="h-36 w-64  object-cover" src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-1 text-[40px] font-medium">
+					<div class="h-[35%] pt-5 text-[28px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
 								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
-									STU
+								{props.price}
 								</button>
 							</div>
 						</div>

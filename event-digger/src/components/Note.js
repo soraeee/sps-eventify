@@ -24,7 +24,7 @@ function Note(props) {
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
 								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
-									STU
+								{props.price}
 								</button>
 							</div>
 						</div>
