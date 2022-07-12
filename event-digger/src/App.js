@@ -76,8 +76,8 @@ class App extends Component {
 					<Route path="/add">
 						<Addcard addCard={this.addNote}/>
 					</Route>
-					<Route path="/view">
-						<EventView />
+					<Route path="/view/:id">
+						<EventView notes={this.state.notes}/>
 					</Route>
 				</Switch>
 				</div>
@@ -122,7 +122,7 @@ function EventDisplay(props) {
 					
 					{/* add new event button */}
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
-					<a onClick={() => {window.location.href="/add"}}>
+						<a onClick={() => {window.location.href="/add"}}>
 							<div class="flex flex-row">
 								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
 								Add new event
@@ -138,8 +138,10 @@ function EventDisplay(props) {
 				<div class="pt-8">
 					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
+						
 					{props.notes.map((note, index) => {
-            			return <div  class="mb-10"><Note
+            			return <div  class="mb-10">
+							<a onClick={() => {window.location.href="/view/"+ note.id}}><Note
 								name="test"
 								title={note.title}
 								subtitle={note.subtitle}
@@ -148,7 +150,7 @@ function EventDisplay(props) {
 								price={note.price}
 								format={note.format}
 								file={note.file}
-								time={note.time} /></div>;
+								time={note.time} /></a> </div>;
          				})}
 					</div>
 				</div>
