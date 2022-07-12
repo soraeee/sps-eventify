@@ -8,6 +8,7 @@ class Addcard extends Component {
 		super(props);
 		this.state = {
 			title: '',
+			name: '',
 			subtitle: '',
 			location: '',
 			details: '',
@@ -66,6 +67,7 @@ class Addcard extends Component {
 			time: event.target.value
 		});
 	};
+
 
 	handleChange = (event) => {
 		// console.log(e.target.files);

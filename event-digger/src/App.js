@@ -174,7 +174,7 @@ function Note(props) {
 				<img class="h-36 w-64  object-cover" src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-4 text-[32px] font-medium">
+					<div class="h-[35%] pt-5 text-[28px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div class=" -mt-[8px]">
