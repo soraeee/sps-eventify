@@ -1,29 +1,35 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import React, { useEffect, useState, useRef } from "react";
+import axios from 'axios';
 
 function Addcard() {
     const [title, setTitle] = useState(""); 
+    const [subtitle, setSubtitle] = useState(""); 
+    const [place, setPlace] = useState(""); 
+    const [content, setContent] = useState(""); 
+    const [date, setDate] = useState(""); 
+    const [image, setImage] = useState(""); 
+
+
     const [message, setMessage] = useState(""); 
     let handleSubmit = (e) => {       
         e.preventDefault(); 
-        try { 
-            console.log(JSON.stringify({ title: title, }));
-            let res = fetch("https://qzhu-sps-summer22.ue.r.appspot.com/form", 
-            { method: "POST", 
-              headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-               },
-              body: JSON.stringify({ title: title, }), }).then(response => response.json())           
-                .then(data => {             
-                console.log(data)        
-                });   
-            
-            console.log(res);
-            if (res.status === 200) { setTitle(""); setMessage("Form submitted successfully"); } 
-            else { setMessage("Some error occured"); } 
-        } 
-        catch (err) { console.log(err); } 
+        const form = {
+            title,
+            subtitle,
+            place,
+            content,
+            date,
+            image
+          };
+        
+        axios
+            .post('https://qzhu-sps-summer22.ue.r.appspot.com/form', form)
+            .then(() => console.log('Form Created'))
+            .catch(err => {
+                console.error(err);
+            });
+
     }; 
         
 	return (
@@ -79,6 +85,7 @@ function Addcard() {
 								id="username"
 								type="text"
 								placeholder="subtitle"
+                                onChange={(e) => setSubtitle(e.target.value)}
 							/>
 						</div>
 
@@ -91,7 +98,11 @@ function Addcard() {
   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
   </div>
-  <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+  <input datepicker 
+    type="text" 
+    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+    placeholder="Select date"
+    onChange={(e) => setDate(e.target.value)}>
 </input>
 </div>
                                 </div>
@@ -113,6 +124,7 @@ function Addcard() {
 								id="username"
 								type="text"
 								placeholder="type here"
+                                onChange={(e) => setPlace(e.target.value)}
 							/>
 							<div class="ml-3 text-2xl mt-3">Details</div>
 							<textarea
@@ -120,6 +132,7 @@ function Addcard() {
 								id="username"
 								type="text"
 								placeholder="ff"
+                                onChange={(e) => setContent(e.target.value)}
 							/>
 							
                             {/* Image */}
@@ -144,7 +157,9 @@ function Addcard() {
 										Attach a file
 									</p>
 								</div>
-								<input type="file" class="opacity-0" />
+								<input type="file" 
+                                       class="opacity-0"
+                                       onChange={(e) => setImage(e.target.value)} />
 							</label>
 							<div class="text-right mr-36 mt-16">
                             <button type="submit" class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"> 

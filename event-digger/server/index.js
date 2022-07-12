@@ -1,66 +1,66 @@
-const bodyParser = require('body-parser')
-const path = require('path');
+
+'use strict';
+
 const express = require('express');
-const router = express.Router();
+const logger = require('morgan');
+const cors = require('cors');
 const app = express();
+const path = require('path');
 
+// Load static files
 app.use(express.static(path.join(__dirname,"../build")));
-app.use("/",router);
-
-// app.use(express.json()) 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
-
-
 app.use(express.static('dist'));
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://qzhu-sps-summer22.ue.r.appspot.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+
+// Connect to google cloud datastore
+app.enable('trust proxy');
+const {Datastore} = require('@google-cloud/datastore');
+const datastore = new Datastore({
+    projectId: 'qzhu-sps-summer22',
+  });
+  
+const insertForm = form => {
+return datastore.save({
+    key: datastore.key('form'),
+    data: form,
+});
+};
+
+// insertForm({title: '',
+//             subtitle: '',
+//             place: '',
+//             content: '',
+//             date: '',
+//             image: ''
+//           });
+
+const form1 = {
+    timestamp: new Date(),
+    // Store a hash of the form
+    message: 'test1'
+  };
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,    //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
+app.use(cors(corsOptions));
+app.use(logger('dev'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+    res.send('Hello!');
+  });
+
+// Get POST form from frontend 
+app.post('/form', cors(), function (req, res) {
+    console.log(req.body);
+    insertForm(req.body);
 });
 
-router.get("/",(req, res) => {
-    res.sendfile("index.html");
-    });
-
-    
-router.post("/form",(request,response) => {
-    //code to perform particular action.
-    //To access POST variable use req.body()methods.
-    console.log(request.body);
-    response.sendStatus(200);
-    });
-    
-// const {Datastore} = require('@google-cloud/datastore');
-
-// // Instantiate a datastore client
-// const datastore = new Datastore({
-//     projectId: 'form_store_1',
-// });
-
-/**
- * Insert a record into the database.
- *
- * @param {object} visit The visit record to insert.
- */
-// const insertVisit = form => {
-//     return datastore.save({
-//     key: datastore.key('form'),
-//     data: form1,
-//     });
-// };
-
-/**
- * Retrieve the latest 10 visit records from the database.
- */
-// const getVisits = () => {
-//     const query = datastore
-//     .createQuery('form')
-//     .order('title', {descending: true})
-//     .limit(10);
-
-//     return datastore.runQuery(query);
-// };
-
+// don't change this when deployed to app engine
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
