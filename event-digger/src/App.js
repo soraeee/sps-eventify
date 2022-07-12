@@ -66,7 +66,7 @@ class App extends Component {
 	render() {
 	return (
 		<Router>
-			<div className="font-[Futura]">
+			<div className="font-[Rubik]">
 				<NavBar className="z-30"/>
 				<div class="pl-48 pt-36 h-screen w-screen p-4">
 				<Switch >
