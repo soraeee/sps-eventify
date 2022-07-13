@@ -82,16 +82,26 @@ function EventView(props) {
 														<img src={time} class="scale-[60%] " />
 														<div class="h-1 ml-5 mt-4">{note.time}</div>
 													</div>
+													<div class="flex flex-row  h-16">
+														<img src={price} class="scale-[60%] " />
+														<div class="h-1 ml-5 mt-4">{note.count} people registered</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div>
 										<div class="ml-3 text-2xl mt-10 mb-4">Details</div>
-										<div class="indent-2 pt-6 text-medium shadow appearance-none border w-[1000px] h-[205px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+										<div class="ml-3 mt-1 indent-2 pt-6 text-medium shadow appearance-none border w-[1000px] h-[205px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 											{note.details}
 										</div>
 									</div>
+									<button
+										class=" mt-3 items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white"
+										onClick={() => props.updateCount(params.id)}
+									>
+										register
+									</button>
 								</div>
 							</div>
 						</div>

@@ -19,6 +19,7 @@ import Addcard from './AddCard';
 import CardView from './CardView';
 import EventView from './EventView';
 
+
 class App extends Component {
 	constructor(props) {
 	  super(props);
@@ -55,10 +56,19 @@ class App extends Component {
 	  }, this.saveNotes);
 	};
   
-	editNote = (note) => {
+	editNote = (id) => {
+		console.log("hi")
 	  this.setState((state) => {
 		return {
-		  notes: state.notes.map((n) => (n.id === note.id ? note : n)),
+		  notes: state.notes.map((n) => {
+			// 👇️ if id equals 2, update country property
+			if (n.id === id) {
+			  return {...n, count: n.count+1};
+			}
+	  
+			// 👇️ otherwise return object as is
+			return n;
+		  }),
 		};
 	  }, this.saveNotes);
 	};
@@ -77,7 +87,7 @@ class App extends Component {
 						<Addcard addCard={this.addNote}/>
 					</Route>
 					<Route path="/view/:id">
-						<EventView notes={this.state.notes}/>
+						<EventView notes={this.state.notes}  updateCount = {this.editNote}/>
 					</Route>
 				</Switch>
 				</div>
@@ -174,10 +184,10 @@ function Note(props) {
 				<img class="h-36 w-64  object-cover" src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-5 text-[28px] font-medium">
+					<div class="h-[35%] pt-6 text-[18px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
-							<div class=" -mt-[8px]">
+							<div >
 								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
 								{props.price}
 								</button>

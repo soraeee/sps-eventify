@@ -15,7 +15,8 @@ class Addcard extends Component {
 			format: '',
 			price: '',
 			time: '',
-			file: ''
+			file: '',
+			count: 0
 		};
 	}
 
