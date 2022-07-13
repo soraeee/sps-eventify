@@ -69,7 +69,6 @@ class Addcard extends Component {
 		});
 	};
 
-
 	handleChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
 			let reader = new FileReader();
@@ -240,19 +239,22 @@ class Addcard extends Component {
 									</label>
 									<div class="flex flex-col mt-[-40px] gap-2">
 										Preview:
-										{this.state.file != "" ? (	
-											<img class="h-36 w-64  object-cover border-gray-300" src={this.state.file} />
-										) : (<div class="h-36 w-64 border-gray-300 text-gray-400 border-4 bg-gray-100 text-center border-dashed  items-center">
-											<div class="pt-[52px]">upload to preview!</div>
-										</div>)}
-										
-										
+										{this.state.file != '' ? (
+											<img
+												class="h-36 w-64  object-cover border-gray-300"
+												src={this.state.file}
+											/>
+										) : (
+											<div class="h-36 w-64 border-gray-300 text-gray-400 border-4 bg-gray-100 text-center border-dashed  items-center">
+												<div class="pt-[52px]">upload to preview!</div>
+											</div>
+										)}
 									</div>
 								</div>
 								<a
 									class="text-right mr-36 mt-16"
 									onClick={() => {
-										window.location.href = '/';
+										window.location.href = '/event';
 									}}
 								>
 									<button

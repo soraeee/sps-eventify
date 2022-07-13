@@ -65,12 +65,9 @@ class App extends Component {
 	  this.setState((state) => {
 		return {
 		  notes: state.notes.map((n) => {
-			// 👇️ if id equals 2, update country property
 			if (n.id === id) {
 			  return {...n, count: n.count+1};
 			}
-	  
-			// 👇️ otherwise return object as is
 			return n;
 		  }),
 		};
@@ -81,18 +78,21 @@ class App extends Component {
 	return (
 		<Router>
 			<div className="font-[Rubik]">
-				<NavBar className="z-30"/>
-				<div class="pl-48 pt-36 h-screen w-screen p-4">
+				<div className="z-30">
+				<NavBar />
+				</div>
+				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10">
+				
 				<Switch >
 					<Route exact path="/">
-					<Landing/>
+						<Landing/>
 					
 					</Route>
 					<Route path="/add">
 						<Addcard addCard={this.addNote}/>
 					</Route>
 					<Route path="/event">
-					<EventDisplay notes={this.state.notes} />
+						<EventDisplay notes={this.state.notes} />
 					</Route>
 					<Route path="/view/:id">
 						<EventView notes={this.state.notes}  updateCount = {this.editNote}/>
@@ -151,14 +151,11 @@ function EventDisplay(props) {
 							</div>
 						</a>
 					</button>
-					
 
 					<div class="w-[10%]" />
-					{/* </div> */}
 				</div>
 				<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
 				<div class="pt-8">
-					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
 						
 					{props.notes.map((note, index) => {
@@ -199,8 +196,8 @@ function Note(props) {
 					<div class="h-[35%] pt-5 text-[18px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
-							<div >
-								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
+							<div class="mt-[-2px]">
+								<button class=" items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
 								{props.price}
 								</button>
 							</div>
