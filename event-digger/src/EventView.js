@@ -25,7 +25,7 @@ function EventView(props) {
 										{/* return */}
 										<a
 											onClick={() => {
-												window.location.href = '/';
+												window.location.href = '/event';
 											}}
 										>
 											<svg

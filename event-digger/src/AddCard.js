@@ -93,7 +93,7 @@ class Addcard extends Component {
 								{/* return */}
 								<a
 									onClick={() => {
-										window.location.href = '/';
+										window.location.href = '/event';
 									}}
 								>
 									<svg

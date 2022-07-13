@@ -14,10 +14,14 @@ import add from './icons/add.svg';
 import location from './icons/location.svg';
 import notification from './icons/notification.svg';
 import logout from './icons/logout.svg';
+import home from './icons/home.svg';
+import mail from './icons/mail.svg';
+import file from './icons/file.svg';
 
 import Addcard from './AddCard';
 import CardView from './CardView';
 import EventView from './EventView';
+import Landing from './Landing';
 
 
 class App extends Component {
@@ -81,10 +85,14 @@ class App extends Component {
 				<div class="pl-48 pt-36 h-screen w-screen p-4">
 				<Switch >
 					<Route exact path="/">
-						<EventDisplay notes={this.state.notes} />
+					<Landing/>
+					
 					</Route>
 					<Route path="/add">
 						<Addcard addCard={this.addNote}/>
+					</Route>
+					<Route path="/event">
+					<EventDisplay notes={this.state.notes} />
 					</Route>
 					<Route path="/view/:id">
 						<EventView notes={this.state.notes}  updateCount = {this.editNote}/>
@@ -106,10 +114,14 @@ function NavBar() {
 					</div>
 					<div class="h-[70%] pl-3 pt-3 ">
 						<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
-							<Button />
-							<Button />
-							<Button />
-							<Button />
+						<a onClick={() => {window.location.href="/"}}>
+							<Button icon={home}/>
+							</a>
+							<a onClick={() => {window.location.href="/event"}}>
+							<Button icon={btn1}/>
+							</a>
+							<Button icon={mail}/>
+							<Button icon={file}/>
 						</div>
 					</div>
 					<div class="h-40% pl-11 pt-7">
@@ -271,10 +283,10 @@ function Dropbox(props) {
 
 
 
-function Button() {
+function Button(props) {
 	return (
 		<div class="box-border h-[54px] w-[54px] p-4 hover:bg-[#5BD7A4] rounded-xl">
-			<img src={btn1} class="scale-[120%]" alt="My logo" />
+			<img src={props.icon} class="scale-[120%]" alt="My logo" />
 		</div>
 	);
 }
