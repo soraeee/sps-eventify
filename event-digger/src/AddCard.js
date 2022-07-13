@@ -7,15 +7,15 @@ class Addcard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			title: '',
-			name: '',
-			subtitle: '',
-			location: '',
-			details: '',
-			format: '',
-			price: '',
-			time: '',
-			file: '',
+			title: 'Title',
+			name: 'Author',
+			subtitle: 'subtitle',
+			location: 'location',
+			details: 'details',
+			format: 'Class',
+			price: 'Free',
+			time: 'time',
+			file: 'https://www.coywolf.news/wp-content/uploads/2019/07/googlebot.png',
 			count: 0
 		};
 	}
@@ -71,11 +71,6 @@ class Addcard extends Component {
 
 
 	handleChange = (event) => {
-		// console.log(e.target.files);
-		// this.setState({
-		// 	file: URL.createObjectURL(e.target.files[0])
-		// });
-
 		if (event.target.files && event.target.files[0]) {
 			let reader = new FileReader();
 			reader.onload = (e) => {

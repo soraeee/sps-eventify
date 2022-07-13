@@ -180,11 +180,11 @@ function Note(props) {
 					</div>
 				</div>
 
-				<div class="h-[40%]">
-				<img class="h-36 w-64  object-cover" src={props.file} /> 
+				<div class="h-[48%] border-4">
+				<img class="h-34 w-[235px] object-cover " src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-6 text-[18px] font-medium">
+					<div class="h-[35%] pt-5 text-[18px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div >
@@ -194,7 +194,7 @@ function Note(props) {
 							</div>
 						</div>
 					</div>
-					<div class="h-[25%] pt-1 text-[10px] text-[#A6ACBE]" text="default">
+					<div class="h-[25%] text-[12px] text-[#A6ACBE]" text="default">
 						{props.subtitle}
 					</div>
 					<div class="flex flex-row gap-2 h-[10%] text-[11px] text-[#A6ACBE]">
