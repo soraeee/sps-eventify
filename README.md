@@ -10,7 +10,6 @@ wow!!
 `npm i react-router-dom` install two necessary npm package that's not included in the default
 5. `npm run client` for client side; `npm run server` for server side
 
-
 ## To run it on cloudshell
 1. go to cloudshell editor, follow all five steps in [Getting Started]
 2. enter 'y' when the terminal asks you whether to run on another port
