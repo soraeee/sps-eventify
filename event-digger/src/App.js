@@ -190,7 +190,7 @@ function Note(props) {
 				</div>
 
 				<div class="h-[48%] border-4">
-				<img class="h-34 w-[235px] object-cover " src={props.file} /> 
+				<img class="h-[128px] w-[235px] object-cover " src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
 					<div class="h-[35%] pt-5 text-[18px] font-medium">
