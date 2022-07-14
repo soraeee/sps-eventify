@@ -15,10 +15,12 @@ app.use(express.static('dist'));
 // Connect to google cloud datastore
 app.enable('trust proxy');
 const {Datastore} = require('@google-cloud/datastore');
+
 const datastore = new Datastore({
     projectId: 'qzhu-sps-summer22',
+    keyFilename: path.join(__dirname, '../qzhu-sps-summer22-9aeb80bb574c.json')
   });
-  
+
 const insertForm = form => {
 return datastore.save({
     key: datastore.key('form'),
@@ -26,19 +28,6 @@ return datastore.save({
 });
 };
 
-// insertForm({title: '',
-//             subtitle: '',
-//             place: '',
-//             content: '',
-//             date: '',
-//             image: ''
-//           });
-
-const form1 = {
-    timestamp: new Date(),
-    // Store a hash of the form
-    message: 'test1'
-  };
 
 const corsOptions ={
     origin:'*', 
