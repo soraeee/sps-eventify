@@ -25,7 +25,7 @@ function EventView(props) {
 										{/* return */}
 										<a
 											onClick={() => {
-												window.location.href = '/';
+												window.location.href = '/event';
 											}}
 										>
 											<svg
@@ -64,8 +64,8 @@ function EventView(props) {
 										<div class="relative ml-4">
 											<div class="text-[18px] flex flex-col pl-5">
 												<div class="h-16 text-4xl">{note.title}</div>
-												<div class="h-12 text-base">Organized by Jessie</div>
-												<div class="h-12 text-[16px] ">
+												<div class="h-12 text-base ml-2">Organized by Google</div>
+												<div class="h-12 text-[16px] ml-2">
 													<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#6FB1E2] rounded-xl  text-white max-w-fit">
 														{note.format}
 													</button>
@@ -79,8 +79,12 @@ function EventView(props) {
 														<div class="h-1 ml-6 mt-4">{note.location}</div>
 													</div>
 													<div class="flex flex-row  h-16">
-														<img src={time} class="scale-[60%] " />
-														<div class="h-1 ml-5 mt-4">{note.time}</div>
+														<img src={time} class="scale-[50%] " />
+														<div class="h-1 ml-4 mt-4">{note.time}</div>
+													</div>
+													<div class="flex flex-row  h-16">
+														<img src={price} class="scale-[40%] ml-[-10px] " />
+														<div class="h-1 ml-1 mt-4">{note.count} people registered</div>
 													</div>
 												</div>
 											</div>
@@ -88,10 +92,16 @@ function EventView(props) {
 									</div>
 									<div>
 										<div class="ml-3 text-2xl mt-10 mb-4">Details</div>
-										<div class="indent-2 pt-6 text-medium shadow appearance-none border w-[1000px] h-[205px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+										<div class="ml-3 mt-1 indent-2 pt-6 text-medium shadow appearance-none border w-[1000px] h-[205px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 											{note.details}
 										</div>
 									</div>
+									<button
+										class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white ml-[880px] mt-8 font-bold py-4 px-6 text-lg rounded-2xl"
+										onClick={() => props.updateCount(params.id)}
+									>
+										Register
+									</button>
 								</div>
 							</div>
 						</div>

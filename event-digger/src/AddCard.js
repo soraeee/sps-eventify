@@ -2,45 +2,113 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from 'axios';
 
-function Addcard() {
-    const [title, setTitle] = useState(""); 
-    const [subtitle, setSubtitle] = useState(""); 
-    const [place, setPlace] = useState(""); 
-    const [content, setContent] = useState(""); 
-    const [date, setDate] = useState(""); 
-    const [image, setImage] = useState(""); 
+class Addcard extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			title: 'Title',
+			name: 'Author',
+			subtitle: 'subtitle',
+			location: 'location',
+			details: 'details',
+			format: 'Class',
+			price: 'Free',
+			time: 'time',
+			file: 'https://www.coywolf.news/wp-content/uploads/2019/07/googlebot.png',
+			count: 0
+		};
+	}
 
+	updateTitle = (event) => {
+		this.setState({
+			title: event.target.value
+		});
+	};
 
-    const [message, setMessage] = useState(""); 
-    let handleSubmit = (e) => {       
-        e.preventDefault(); 
-        const form = {
-            title,
-            subtitle,
-            place,
-            content,
-            date,
-            image
-          };
-        
-        axios
-            .post('https://qzhu-sps-summer22.ue.r.appspot.com/form', form)
-            .then(() => console.log('Form Created'))
-            .catch(err => {
-                console.error(err);
-            });
+	updateSubtitle = (event) => {
+		this.setState({
+			subtitle: event.target.value
+		});
+	};
 
-    }; 
-        
-	return (
-		<div>
-			<div class="pt-4 pl-2">
-				<div class="gap-3 flex flex-col box-border h-[1350px] w-[1210px] p-4 border-2 rounded-[20px] bg-white shadow-2xl shadow-gray-500">
-					<div class=" ml-14 ">
-						{/* return/divider icons */}
-						<div class="h-24 flex flex-col gap-6 mt-4">
-							{/* return */}
-							<Link to="/">
+	updateLocation = (event) => {
+		this.setState({
+			location: event.target.value
+		});
+	};
+
+	updateDetails = (event) => {
+		this.setState({
+			details: event.target.value
+		});
+	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.props.addCard(this.state);
+		console.log('submit');
+	};
+
+	updatePrice = (event) => {
+		console.log(event.target.value);
+		this.setState({
+			price: event.target.value
+		});
+	};
+
+	updateFormat = (event) => {
+		this.setState({
+			format: event.target.value
+		});
+	};
+
+	updateTime = (event) => {
+		this.setState({
+			time: event.target.value
+		});
+	};
+
+	handleChange = (event) => {
+		if (event.target.files && event.target.files[0]) {
+			let reader = new FileReader();
+			reader.onload = (e) => {
+				this.setState({ file: e.target.result });
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		}
+
+		// setFile(URL.createObjectURL(e.target.files[0]));
+	};
+
+	render() {
+		return (
+			<div>
+				<div class="pt-4 pl-2">
+					<div class="gap-3 flex flex-col box-border h-[1350px] w-[1210px] p-4 border-2 rounded-[20px] bg-white shadow-2xl shadow-gray-500">
+						<div class=" ml-14 ">
+							{/* return/divider icons */}
+							<div class="h-24 flex flex-col gap-6 mt-4 z-10">
+								{/* return */}
+								<a
+									onClick={() => {
+										window.location.href = '/event';
+									}}
+								>
+									<svg
+										class="scale-[90%]"
+										width="34"
+										height="34"
+										viewBox="0 0 34 34"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M30.2558 12.2443C27.8417 9.83025 24.6436 8.5 21.25 8.5H8.1345L13.6298 3.00475L10.625 0L0 10.625L10.625 21.25L13.6298 18.2453L8.1345 12.75H21.25C23.5089 12.75 25.6403 13.6383 27.251 15.249C28.8618 16.8598 29.75 18.9911 29.75 21.25C29.75 23.5089 28.8618 25.6403 27.251 27.251C25.6403 28.8618 23.5089 29.75 21.25 29.75H12.75V34H21.25C24.6436 34 27.8417 32.6698 30.2558 30.2558C32.6698 27.8417 34 24.6436 34 21.25C34 17.8564 32.6698 14.6582 30.2558 12.2443Z"
+											fill="#A6ACBE"
+										/>
+									</svg>
+								</a>
+								{/* divider */}
 								<svg
 									width="1034"
 									height="7"
@@ -245,24 +313,33 @@ function Addcard() {
 									</label>
 									<div class="flex flex-col mt-[-40px] gap-2">
 										Preview:
-										{this.state.file != "" ? (	
-											<img class="h-36 w-64  object-cover border-gray-300" src={this.state.file} />
-										) : (<div class="h-36 w-64 border-gray-300 text-gray-400 border-4 bg-gray-100 text-center border-dashed  items-center">
-											<div class="pt-[52px]">upload to preview!</div>
-										</div>)}
-										
-										
+										{this.state.file != '' ? (
+											<img
+												class="h-36 w-64  object-cover border-gray-300"
+												src={this.state.file}
+											/>
+										) : (
+											<div class="h-36 w-64 border-gray-300 text-gray-400 border-4 bg-gray-100 text-center border-dashed  items-center">
+												<div class="pt-[52px]">upload to preview!</div>
+											</div>
+										)}
 									</div>
 								</div>
-								<input type="file" 
-                                       class="opacity-0"
-                                       onChange={(e) => setImage(e.target.value)} />
-							</label>
-							<div class="text-right mr-36 mt-16">
-                            <button type="submit" class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"> 
-									Submit
-							</button>
-						</div>
+								<a
+									class="text-right mr-36 mt-16"
+									onClick={() => {
+										window.location.href = '/event';
+									}}
+								>
+									<button
+										class="bg-[#5BD7A4] hover:bg-[#2CB67D] text-white font-bold py-4 px-6 mt-[-16px] text-lg rounded-2xl"
+										onClick={this.handleSubmit}
+									>
+										Submit
+									</button>
+								</a>
+							</div>
+
 						</div>
 					</div>
 				</div>

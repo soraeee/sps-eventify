@@ -14,10 +14,15 @@ import add from './icons/add.svg';
 import location from './icons/location.svg';
 import notification from './icons/notification.svg';
 import logout from './icons/logout.svg';
+import home from './icons/home.svg';
+import mail from './icons/mail.svg';
+import file from './icons/file.svg';
 
 import Addcard from './AddCard';
 import CardView from './CardView';
 import EventView from './EventView';
+import Landing from './Landing';
+
 
 class App extends Component {
 	constructor(props) {
@@ -55,10 +60,16 @@ class App extends Component {
 	  }, this.saveNotes);
 	};
   
-	editNote = (note) => {
+	editNote = (id) => {
+		console.log("hi")
 	  this.setState((state) => {
 		return {
-		  notes: state.notes.map((n) => (n.id === note.id ? note : n)),
+		  notes: state.notes.map((n) => {
+			if (n.id === id) {
+			  return {...n, count: n.count+1};
+			}
+			return n;
+		  }),
 		};
 	  }, this.saveNotes);
 	};
@@ -67,17 +78,24 @@ class App extends Component {
 	return (
 		<Router>
 			<div className="font-[Rubik]">
-				<NavBar className="z-30"/>
-				<div class="pl-48 pt-36 h-screen w-screen p-4">
+				<div className="z-30">
+				<NavBar />
+				</div>
+				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10">
+				
 				<Switch >
 					<Route exact path="/">
-						<EventDisplay notes={this.state.notes} />
+						<Landing/>
+					
 					</Route>
 					<Route path="/add">
 						<Addcard addCard={this.addNote}/>
 					</Route>
+					<Route path="/event">
+						<EventDisplay notes={this.state.notes} />
+					</Route>
 					<Route path="/view/:id">
-						<EventView notes={this.state.notes}/>
+						<EventView notes={this.state.notes}  updateCount = {this.editNote}/>
 					</Route>
 				</Switch>
 				</div>
@@ -96,10 +114,14 @@ function NavBar() {
 					</div>
 					<div class="h-[70%] pl-3 pt-3 ">
 						<div class="grid grid-rows-4 gap-4 pl-4 pt-4">
-							<Button />
-							<Button />
-							<Button />
-							<Button />
+						<a onClick={() => {window.location.href="/"}}>
+							<Button icon={home}/>
+							</a>
+							<a onClick={() => {window.location.href="/event"}}>
+							<Button icon={btn1}/>
+							</a>
+							<Button icon={mail}/>
+							<Button icon={file}/>
 						</div>
 					</div>
 					<div class="h-40% pl-11 pt-7">
@@ -129,14 +151,11 @@ function EventDisplay(props) {
 							</div>
 						</a>
 					</button>
-					
 
 					<div class="w-[10%]" />
-					{/* </div> */}
 				</div>
 				<h2 class="text-[25px] pl-1 text-[#A6ACBE]">Your all-in-one event planner</h2>
 				<div class="pt-8">
-					{/* <div class="box-border h-[325px] w-[285px] p-4 border-4 rounded-[20px]">PIG</div> */}
 					<div class="grid grid-cols-4">
 						
 					{props.notes.map((note, index) => {
@@ -170,21 +189,21 @@ function Note(props) {
 					</div>
 				</div>
 
-				<div class="h-[40%]">
-				<img class="h-36 w-64  object-cover" src={props.file} /> 
+				<div class="h-[48%] border-4">
+				<img class="h-[128px] w-[235px] object-cover " src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-5 text-[28px] font-medium">
+					<div class="h-[35%] pt-5 text-[18px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
-							<div class=" -mt-[8px]">
-								<button class="items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
+							<div class="mt-[-2px]">
+								<button class=" items-center justify-center h-7 px-4 text-center box-border bg-[#2CB67D] rounded-xl text-[12px] text-white">
 								{props.price}
 								</button>
 							</div>
 						</div>
 					</div>
-					<div class="h-[25%] pt-1 text-[10px] text-[#A6ACBE]" text="default">
+					<div class="h-[25%] text-[12px] text-[#A6ACBE]" text="default">
 						{props.subtitle}
 					</div>
 					<div class="flex flex-row gap-2 h-[10%] text-[11px] text-[#A6ACBE]">
@@ -261,10 +280,10 @@ function Dropbox(props) {
 
 
 
-function Button() {
+function Button(props) {
 	return (
 		<div class="box-border h-[54px] w-[54px] p-4 hover:bg-[#5BD7A4] rounded-xl">
-			<img src={btn1} class="scale-[120%]" alt="My logo" />
+			<img src={props.icon} class="scale-[120%]" alt="My logo" />
 		</div>
 	);
 }
