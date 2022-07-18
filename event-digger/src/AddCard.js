@@ -157,7 +157,7 @@ class Addcard extends Component {
 									</div>
 								</div>
 								<div class="flex flex-row">
-									<div class="h-12 w-[20%]  text-2xl">Format</div>
+									<div class="h-12 w-[20%]  text-2xl">Tag</div>
 									<div class="flex flex-row gap-6 text-lg mt-2 " onChange={this.updateFormat}>
 										<input
 											type="radio"
@@ -187,10 +187,10 @@ class Addcard extends Component {
 											defaultChecked
 										/>{' '}
 										FREE
-										<input type="radio" value="$" name="Price" class="mb-2 w-[15px] " /> $1-10
-										<input type="radio" value="$$" name="Price" class="mb-2 w-[15px] " /> $10-30
-										<input type="radio" value="$$$" name="Price" class="mb-2 w-[15px] " /> $30-50
-										<input type="radio" value="$$$$" name="Price" class="mb-2 w-[15px] " /> $50+
+										<input type="radio" value="$1-10" name="Price" class="mb-2 w-[15px] " /> $1-10
+										<input type="radio" value="$10-30" name="Price" class="mb-2 w-[15px] " /> $10-30
+										<input type="radio" value="$30-50" name="Price" class="mb-2 w-[15px] " /> $30-50
+										<input type="radio" value="$50+" name="Price" class="mb-2 w-[15px] " /> $50+
 									</fieldset>
 								</div>
 							</div>
