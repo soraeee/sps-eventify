@@ -27,6 +27,8 @@ class App extends Component {
 	  super(props);
 	  this.state = {
 		notes: [],
+		tag: "All Tags",
+		price: "Any Price",
 		filters: [
 			{name: 'Date', value: 0},
 			{name: 'Price', value: 0},
@@ -36,9 +38,9 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		 //localStorage.clear();
-	  const notes = window.localStorage.getItem("notes");
-	  this.setState({
+		// localStorage.clear();
+		const notes = window.localStorage.getItem("notes");
+		this.setState({
 		notes: notes ? JSON.parse(notes) : [],
 	  });
 	}
@@ -84,9 +86,25 @@ class App extends Component {
 					if (title === entry.name) {
 						entry.value = index;
 					}
-					console.log(entry);
 					return entry;
-				})
+				}),
+				
+			}
+		})
+	}
+
+	updateTab = (tab) => {
+		this.setState(state => {
+			return {
+				tag: tab
+			}
+		})
+	}
+
+	updatePrice = (tab) => {
+		this.setState(state => {
+			return {
+				price: tab
 			}
 		})
 	}
@@ -96,7 +114,7 @@ class App extends Component {
 		<Router>
 			<div className="font-[Rubik]">
 				<div className="z-30">
-				<NavBar cardFilter = {this.updateFilter} />
+				<NavBar cardFilter = {this.updateFilter} tag={this.state.tag} price={this.state.price} updateTab={this.updateTab} updatePrice={this.updatePrice}/>
 				</div>
 				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10">
 				
@@ -146,7 +164,7 @@ function NavBar(props) {
 					</div>
 				</div>
 				<div class="ml-28 pt-8 fixed h-28 w-screen p-4 border-b-2 bg-white">
-					<Selection cardFilter = {props.cardFilter} />
+					<Selection cardFilter = {props.cardFilter} tag={props.tag} price={props.price} updateTab={props.updateTab} updatePrice={props.updatePrice}/>
 				</div>
 		</div>
 	);
@@ -252,15 +270,13 @@ function Selection(props) {
 			<div class="w-[35%]">
 				<Search />
 			</div>
-			<div class="w-[8%]" />
-			<div class="w-[12%]">
-				<Dropbox title="Date" list={["all dates", "today","in 3 days","in a week","in a month"]} filter = {props.cardFilter}/>
-			</div>
-			<div class="w-[12%]">
-				<Dropbox title="Tag" list={["all tags", "class", "festival", "networking", "party", "performance"]} filter = {props.cardFilter}/>
+			<div class="w-[18%]" />
+			
+			<div class="w-[14%]">
+				<Dropbox title="Tag" tag={props.tag} updateTab={props.updateTab} list={["All Tags", "Class", "Festival", "Networking", "Party", "Performance"]} filter = {props.cardFilter}/>
 			</div>
 			<div class="w-[16%]">
-				<Dropbox title="Price" list={["any price", "free", "$1-10", "$10-30", "$30-50", "$50+"]} filter = {props.cardFilter}/>
+				<Dropbox title="Price" tag={props.price} updateTab={props.updatePrice} list={["Any price", "Free", "$1-10", "$10-30", "$30-50", "$50+"]} filter = {props.cardFilter}/>
 			</div>
 			<div class="w-[4%]">
 				<img src={notification} class="scale-[90%] pl-3 pt-3 " />
@@ -273,11 +289,16 @@ function Selection(props) {
 }
 
 function Dropbox(props) {
-	console.log(props)
+	function tabClicked (title, index, m) {
+		console.log("hi")
+		props.filter(title, index);
+		props.updateTab(m)
+	}
+
 	return (
 		<div>
-			<button class="relative w-36 flex flex-row jutify-center items-center bg-white text-gray-600 rounded  shadow group">
-				<p class="px-4 w-2/3 text-left ml-2">{props.title}</p>
+			<button class="relative w-44 flex flex-row jutify-center items-center bg-white text-gray-600 rounded  shadow group">
+				<p class="px-4 w-2/3 text-left ml-2">{props.tag}</p>
 				<div class="p-2 ">
 					<svg
 						class="w-5 h-5"
@@ -294,7 +315,7 @@ function Dropbox(props) {
 						{props.list.map((m, index) => {
           					return (
             					<>
-									<li class="px-4 py-1 hover:bg-gray-100 border-b" onClick = {() => props.filter(props.title, index)}>{m}</li>
+									<li class="px-4 py-1 hover:bg-gray-100 border-b" onClick = {() => tabClicked(props.title, index, m)}>{m}</li>
 								</>
           					);
         				})}	
