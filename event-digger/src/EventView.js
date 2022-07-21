@@ -80,7 +80,7 @@ function EventView(props) {
 													</div>
 													<div class="flex flex-row  h-16">
 														<img src={time} class="scale-[50%] " />
-														<div class="h-1 ml-4 mt-4">{note.time}</div>
+														<div class="h-1 ml-4 mt-4">{Date(note.time).toString()}</div>
 													</div>
 													<div class="flex flex-row  h-16">
 														<img src={price} class="scale-[40%] ml-[-10px] " />

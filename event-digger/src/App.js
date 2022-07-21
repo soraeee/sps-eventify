@@ -192,7 +192,7 @@ function EventDisplay(props) {
 									price={note.price}
 									format={note.format}
 									file={note.file}
-									time={note.time} />
+									time={Date(note.time).toString()} />
 								</a>
 							</div>;
 						}
