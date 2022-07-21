@@ -19,7 +19,6 @@ import mail from './icons/mail.svg';
 import file from './icons/file.svg';
 
 import Addcard from './AddCard';
-import CardView from './CardView';
 import EventView from './EventView';
 import Landing from './Landing';
 
@@ -37,7 +36,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		// localStorage.clear();
+		 //localStorage.clear();
 	  const notes = window.localStorage.getItem("notes");
 	  this.setState({
 		notes: notes ? JSON.parse(notes) : [],
