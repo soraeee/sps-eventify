@@ -47,11 +47,9 @@ class Addcard extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		this.props.addCard(this.state);
-		console.log('submit');
 	};
 
 	updatePrice = (event) => {
-		console.log(event.target.value);
 		this.setState({
 			price: event.target.value
 		});
@@ -77,8 +75,6 @@ class Addcard extends Component {
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}
-
-		// setFile(URL.createObjectURL(e.target.files[0]));
 	};
 
 	render() {

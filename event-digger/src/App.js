@@ -67,12 +67,11 @@ class App extends Component {
 	};
   
 	editNote = (id) => {
-		console.log("hi")
 	  this.setState((state) => {
 		return {
 		  notes: state.notes.map((n) => {
 			if (n.id === id) {
-			  return {...n, count: n.count+1};
+			  return {...n, count: n.count+1};     // update register count for specific note selected
 			}
 			return n;
 		  }),
@@ -291,7 +290,6 @@ function Selection(props) {
 
 function Dropbox(props) {
 	function tabClicked (title, index, m) {
-		console.log("hi")
 		props.filter(title, index);
 		props.updateTab(m)
 	}
