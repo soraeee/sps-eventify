@@ -114,10 +114,10 @@ class App extends Component {
 	return (
 		<Router>
 			<div className="font-[Rubik]">
-				<div className="z-30">
+				<div className="z-30 absolute">
 				<NavBar cardFilter = {this.updateFilter} tag={this.state.tag} price={this.state.price} updateTab={this.updateTab} updatePrice={this.updatePrice}/>
 				</div>
-				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10">
+				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10 absolute">
 				
 				<Switch >
 					<Route exact path="/">
