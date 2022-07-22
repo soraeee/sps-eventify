@@ -66,12 +66,11 @@ class App extends Component {
 	};
   
 	editNote = (id) => {
-		console.log("hi")
 	  this.setState((state) => {
 		return {
 		  notes: state.notes.map((n) => {
 			if (n.id === id) {
-			  return {...n, count: n.count+1};
+			  return {...n, count: n.count+1};     // update register count for specific note selected
 			}
 			return n;
 		  }),
@@ -113,10 +112,10 @@ class App extends Component {
 	return (
 		<Router>
 			<div className="font-[Rubik]">
-				<div className="z-30">
+				<div className="z-30 absolute">
 				<NavBar cardFilter = {this.updateFilter} tag={this.state.tag} price={this.state.price} updateTab={this.updateTab} updatePrice={this.updatePrice}/>
 				</div>
-				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10">
+				<div class="pl-48 pt-36 h-screen w-screen p-4 z-10 absolute">
 				
 				<Switch >
 					<Route exact path="/">
@@ -290,7 +289,6 @@ function Selection(props) {
 
 function Dropbox(props) {
 	function tabClicked (title, index, m) {
-		console.log("hi")
 		props.filter(title, index);
 		props.updateTab(m)
 	}
