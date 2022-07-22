@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import React, { Component, useState } from 'react';
 import { Radio } from '@material-tailwind/react';
 import { withRouter } from 'react-router';
+import DateTimePicker from 'react-datetime-picker';
 
 class Addcard extends Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class Addcard extends Component {
 			details: 'details',
 			format: 'Class',
 			price: 'Free',
-			time: 'time',
+			time: new Date(),
 			file: 'https://www.coywolf.news/wp-content/uploads/2019/07/googlebot.png',
 			count: 0
 		};
@@ -147,13 +148,14 @@ class Addcard extends Component {
 								<div class="flex flex-row">
 									<div class="h-12 w-[20%] text-2xl">Time</div>
 									<div class="h-12 w-[60%]">
-										<input
+										<DateTimePicker value={this.state.time} onChange={(date) => this.setState({time: date})} />
+										{/*<input
 											class="indent-2 text-sm shadow appearance-none border w-[600px] h-[40px] rounded-[13px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 											id="time"
 											type="text"
 											placeholder="MM/DD/YYYY, HH:MM AM or PM"
 											onChange={this.updateTime}
-										/>
+										/>*/}
 									</div>
 								</div>
 								<div class="flex flex-row">

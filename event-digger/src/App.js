@@ -19,7 +19,6 @@ import mail from './icons/mail.svg';
 import file from './icons/file.svg';
 
 import Addcard from './AddCard';
-import CardView from './CardView';
 import EventView from './EventView';
 import Landing from './Landing';
 
@@ -211,7 +210,7 @@ function EventDisplay(props) {
 									price={note.price}
 									format={note.format}
 									file={note.file}
-									time={note.time} />
+									time={Date(note.time).toString()} />
 								</a>
 							</div>;
 						}
