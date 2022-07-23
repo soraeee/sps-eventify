@@ -180,7 +180,7 @@ function EventDisplay(props) {
 					<button class="rounded-none bg-[#2CB67D] pt-6  text-white text-lg w-[15%] flex flex-row">
 						<a onClick={() => {window.location.href="/add"}}>
 							<div class="flex flex-row">
-								<img src={add} class="scale-[60%] pl-4 mt-[-5px]" alt="My logo" />
+								<img src={add} class="h-[24px] w-auto pl-4 mr-3 " alt="My logo" />
 								Add new event
 							</div>
 						</a>
@@ -226,9 +226,9 @@ function Note(props) {
 		<div class="flex box-border h-[373px] w-[270px] p-4 border-2 rounded-[20px] bg-white shadow-lg shadow-gray-500">
 			<div class="text-[18px] flex flex-col">
 				<div class="h-[15%]">
-					<div class="flex flex-row ml-[-8px]">
-						<img src={gym} class="ml-[-2px] scale-[50%]" />
-						<div class="pt-3 ml-[-2px]">{props.name}</div>
+					<div class="flex flex-row gap-2 mt-1">
+						<img src={gym} class="h-[30px] w-auto " />
+						<div class="mt-1">{props.name}</div>
 					</div>
 				</div>
 
