@@ -236,7 +236,7 @@ function Note(props) {
 				<img class="h-[128px] w-[235px] object-cover " src={props.file} /> 
 				</div>
 				<div class="h-[45%] pl-3 flex flex-col gap-2">
-					<div class="h-[35%] pt-5 text-[18px] font-medium">
+					<div class="h-[32%] pt-5 text-[18px] font-medium">
 						<div class="flex flex-row gap-4 ">
 							<div>{props.title}</div>
 							<div class="mt-[-2px]">
@@ -246,16 +246,16 @@ function Note(props) {
 							</div>
 						</div>
 					</div>
-					<div class="h-[25%] text-[12px] text-[#A6ACBE]" text="default">
+					<div class="h-[20%] text-[12px] text-[#A6ACBE]" text="default">
 						{props.subtitle}
 					</div>
-					<div class="flex flex-row gap-2 h-[10%] text-[11px] text-[#A6ACBE]">
+					<div class="flex flex-row gap-2 h-[20%] text-[11px] text-[#A6ACBE]">
 						<img src={time} class="scale-[70%]" />
 						<div class="pb-16">{props.time}</div>
 					</div>
-					<div class="flex flex-row gap-2 h-[10%] text-[11px] text-[#A6ACBE]">
-						<img src={location} class="scale-[80%]" />
-						<div class="pl-1 pb-20">{props.location}</div>
+					<div class="flex flex-row gap-2 h-[16%] text-[11px] text-[#A6ACBE]">
+						<img src={location} class="scale-[70%]" />
+						<div class="pl-1 pt-1">{props.location}</div>
 					</div>
 				</div>
 			</div>
