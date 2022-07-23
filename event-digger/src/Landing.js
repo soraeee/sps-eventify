@@ -29,8 +29,8 @@ function Landing() {
 				</div>
 			</div>
 			<div class="w-[50%] ">
-				<img src={layout} class="scale-[90%] pl-3 pt-2 z-10" />
-				<img src={hamster} class="h-[350px] w-auto mt-[-250px] ml-[-60px] z-30 absolute" />
+				<img src={layout} class="h-[472px] pl-3 pt-2 z-20 absolute" />
+				<img src={hamster} class="h-[350px] w-auto mt-[210px] ml-[-60px] z-30 absolute" />
 			</div>
 		</div>
 	);
