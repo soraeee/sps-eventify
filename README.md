@@ -37,5 +37,4 @@ if the terminal run into any unexpected error, try copy pasting the error messag
 thanks ᕦ(ò_óˇ)ᕤ 
 
 ## deploy
-deployed website: https://sps-diego-event-digger.netlify.app
-instuction on how to deploy will be updated later..
+deployed website: https://eventifyy.netlify.app/
